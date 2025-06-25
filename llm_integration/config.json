@@ -1,0 +1,8 @@
+{
+    "provider": "local",
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 1024,
+    "top_p": 0.9,
+    "local_api_url": "http://localhost:1234/v1/chat/completions"
+}

@@ -1,0 +1,32 @@
+Dynamic Routing Table
+====================
+ID: organ-1
+  name: Brainstem
+  type: processor
+  capabilities: ['input_processing', 'response_filtering', 'prepare_output']
+
+ID: organ-2
+  name: Ears
+  type: input
+  capabilities: ['receive']
+
+ID: organ-3
+  name: Mouth
+  type: output
+  capabilities: ['speak']
+
+ID: organ-5
+  name: TestOrgan
+  type: test
+  capabilities: ['test_action', 'dynamic_capability']
+
+ID: organ-6
+  name: BackupMouth
+  type: output
+  capabilities: ['speak']
+
+ID: organ-7
+  name: ExtraMouth
+  type: output
+  capabilities: ['speak']
+

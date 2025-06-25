@@ -1,0 +1,10 @@
+{
+  "route-abc12345": {
+    "organ_id": "organA",
+    "final_destination": "processorX"
+  },
+  "route-def67890": {
+    "organ_id": "organB",
+    "final_destination": "processorY"
+  }
+}

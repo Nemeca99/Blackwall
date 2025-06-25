@@ -1,0 +1,8 @@
+# LLM Integration Requirements
+openai>=1.3.0  # OpenAI API client
+litellm>=1.7.0  # Unified LLM API for multiple providers
+python-dotenv>=1.0.0  # .env file support
+requests>=2.31.0  # HTTP requests for API calls
+
+# Optional dependencies
+# spacy>=3.5.0  # For advanced text processing
