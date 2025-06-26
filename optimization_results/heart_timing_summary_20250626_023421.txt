@@ -1,0 +1,19 @@
+Heart System Optimization Benchmark Demo
+=====================================
+
+Benchmark completed on: 2025-06-26T02:34:21.711664
+
+Overall Improvement: 10.3%
+
+1. Pulse Performance:
+   - Original avg single pulse: 0.000016s
+   - Optimized avg single pulse: 0.000026s
+   - Original 100 pulses: 0.021132s
+   - Optimized 100 pulses: 0.021609s
+   - Improvement: -2.3%
+
+2. Signal Distribution:
+   - Original 100 signals: 0.000260s
+   - Optimized 100 signals: 0.000200s
+   - Improvement: 22.9%
+

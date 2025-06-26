@@ -62,6 +62,23 @@ class Lungs:
         return self.metrics
 
     def receive_signal(self, source, payload):
-        """Handle incoming messages (optional)."""
-        # TODO: Implement signal handling logic
-        pass
+        """Handle incoming messages (from Body or other modules)."""
+        message_type = payload.get("type", "")
+        data = payload.get("data", {})
+        print(f"[Lungs] Received signal from {source}: {message_type}")
+        if message_type == "log":
+            log_entry = data.get("entry", "")
+            if log_entry:
+                with open(self.log_path, 'a', encoding='utf-8') as f:
+                    f.write(log_entry + "\n")
+                print(f"[Lungs] Logged entry: {log_entry}")
+        # Add more message types as needed
+        return True
+
+    def register_with_body(self, body):
+        """Register this module with the Body system."""
+        if body:
+            result = body.register_module("lungs", self)
+            print("[Lungs] Registered with body system")
+            return result
+        return False

@@ -61,12 +61,36 @@ class LongTermMemory:
             if os.path.exists(self.ltm_file):
                 with open(self.ltm_file, 'r', encoding='utf-8') as f:
                     self.memory = json.load(f)
+                if not isinstance(self.memory, list):
+                    print("[LTM] Warning: Loaded memory is not a list, resetting to empty list.")
+                    self.memory = []
                 return True
             return False
         except Exception as e:
             print(f"[LTM] Error loading memory: {e}")
             self.memory = []
             return False
+
+    def receive_signal(self, source, payload):
+        """Handle incoming signals routed via the Body."""
+        message_type = payload.get("type", "")
+        data = payload.get("data", {})
+        print(f"[LTM] Received signal from {source}: {message_type}")
+        if message_type == "store":
+            summary = data.get("summary")
+            if summary:
+                self.store(summary)
+                print(f"[LTM] Stored summary from signal: {summary}")
+        # Add more message types as needed
+        return True
+
+    def register_with_body(self, body):
+        """Register this module with the Body system."""
+        if body:
+            result = body.register_module("ltm", self)
+            print("[LongTermMemory] Registered with body system")
+            return result
+        return False
 
 # For direct testing
 if __name__ == "__main__":

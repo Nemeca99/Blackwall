@@ -9,6 +9,7 @@ Integrates left/right hemispheres (STM/LTM) and handles fragment selection.
 import os
 import json
 import sys
+import time
 from pathlib import Path
 
 # Add parent directory to path for relative imports
@@ -20,12 +21,22 @@ import Left_Hemisphere
 import Right_Hemisphere
 import soul
 import body
+import dream_manager
+import fragment_manager
+import router
+import heart
+import queue_manager
 
 # Import classes
 ShortTermMemory = Left_Hemisphere.ShortTermMemory
 LongTermMemory = Right_Hemisphere.LongTermMemory
 Soul = soul.Soul
 Body = body.Body
+DreamManager = dream_manager.DreamManager
+FragmentManager = fragment_manager.FragmentManager
+Router = router.Router
+Heart = heart.Heart
+QueueManager = queue_manager.QueueManager
 
 # Path to fragment profiles
 FRAGMENT_PROFILES_PATH = os.path.join(os.path.dirname(__file__), '..', 'personality', 'fragment_profiles_and_blends.json')
@@ -59,20 +70,84 @@ class Brainstem:
         print("[Brainstem] Initializing Lyra Blackwall biomimetic system...")
         
         # Initialize core components
-        self.stm = ShortTermMemory()
-        self.ltm = LongTermMemory()
-        self.soul = Soul()
         self.body = Body()
+        self.soul = Soul()
+        self.heart = Heart(brainstem=self, body=self.body)
+        self.queue_manager = QueueManager(pulse_capacity=10)
+        
+        # Register this module with the body
+        self.body.register_module("brainstem", self)
+        
+        # Initialize and register memory systems
+        self.heart.register_with_body(self.body)
+        self.ltm = LongTermMemory()
+        self.stm = ShortTermMemory()
+        self.body.register_module("ltm", self.ltm)
+        self.body.register_module("stm", self.stm)
+        
+        # Initialize and register auxiliary systems
+        self.dream_manager = DreamManager(long_term_memory=self.ltm, heart=self.heart, body=self.body)
+        self.fragment_manager = FragmentManager()
+        self.router = Router()
+        self.body.register_module("dream_manager", self.dream_manager)
+        self.body.register_module("fragment_manager", self.fragment_manager)
+        
+        # Initialize LLM interface
         self.llm = LLMInterface()
         
         # Load fragment profiles
-        self.fragments = self._load_fragments()
+        self.fragments = {}
+        try:
+            with open(FRAGMENT_PROFILES_PATH, 'r') as f:
+                self.fragments = json.load(f)
+        except Exception as e:
+            print(f"[Brainstem] Error loading fragment profiles: {e}")
         
-        # Initialize state
-        self.active_fragments = {"Lyra": 0.5, "Blackwall": 0.3, "Nyx": 0.2}
-        self.state = "ready"
+        # Initial fragments (default configuration)
+        self.active_fragments = {"Lyra": 0.5, "Blackwall": 0.5}
+        
+        # Conversation tracking
+        self.conversation = []
+        self.last_dream_check = time.time()
         
         print("[Brainstem] System initialized and ready.")
+        
+    def register_with_body(self, body):
+        """Register this module with the Body system."""
+        if body and body != self.body:  # Avoid re-registering with our own body
+            result = body.register_module("brainstem", self)
+            print("[Brainstem] Registered with external body system")
+            return result
+        return True  # We already have our own body registered
+
+    def pulse(self, interval=1.0):
+        """Handle heart pulse - process queued items and run maintenance tasks.
+        
+        Args:
+            interval: Time since last pulse in seconds
+        """
+        # Use on_heartbeat method of queue_manager to process items
+        heartbeat_data = {"interval": interval, "timestamp": time.time()}
+        self.queue_manager.on_heartbeat(heartbeat_data)
+        
+        # Run periodic maintenance tasks on a regular schedule
+        self._run_maintenance_tasks(interval)
+        
+        return True
+        
+    def _run_maintenance_tasks(self, interval=1.0):
+        """Run periodic maintenance tasks like memory consolidation and dream checks."""
+        # Periodically check if memory consolidation is needed
+        if hasattr(self, "last_consolidation") and time.time() - self.last_consolidation > 300:  # 5 minutes
+            self._consolidate_memory()
+            self.last_consolidation = time.time()
+            
+        # Periodically check if dream cycle is needed
+        if hasattr(self, "last_dream_check") and time.time() - self.last_dream_check > 300:  # 5 minutes
+            self.check_for_dream_cycle()
+            self.last_dream_check = time.time()
+        
+        return True
     
     def _load_fragments(self):
         """Load fragment profiles from configuration."""
@@ -107,9 +182,21 @@ class Brainstem:
         # Store in short-term memory
         self.stm.store({"role": "user", "content": user_input})
         
-        # Select fragments based on input content
-        self._select_fragments(user_input)
+        # Check for fragment adjustments from input
+        fragment_adjustments = self.fragment_manager.analyze_input_for_fragments(user_input)
+        if fragment_adjustments:
+            print("[Brainstem] Adjusting fragment activations based on input...")
+            self.fragment_manager.adjust_fragment_levels(fragment_adjustments)
+            self.active_fragments = self.fragment_manager.get_activation_levels()
         
+        # Use the router to route the input as a message to appropriate components
+        input_message = {
+            "type": "input",
+            "content": user_input,
+            "fragments": self.active_fragments if hasattr(self, 'active_fragments') else {}
+        }
+        self.router.route(input_message, source="brainstem")
+            
         # Generate system prompt based on active fragments
         system_prompt = self._generate_system_prompt()
         
@@ -132,6 +219,9 @@ class Brainstem:
         # Check if memory consolidation needed
         if len(self.stm.memory) > 20:
             self._consolidate_memory()
+            
+        # Periodically check if dream cycle is needed
+        self.check_for_dream_cycle()
         
         return response
     
@@ -196,6 +286,77 @@ class Brainstem:
         self.stm.clear(keep_last=3)
         
         print("[Brainstem] Memory consolidation complete.")
+    
+    def _schedule_dream_check(self):
+        """Set up periodic dream cycle checks."""
+        self.last_dream_check = time.time()
+        
+    def check_for_dream_cycle(self):
+        """Check if it's time for a dream cycle and run if needed."""
+        # Only check every 5 minutes in this demo
+        current_time = time.time()
+        if current_time - self.last_dream_check < 300:  # 5 minutes
+            return False
+            
+        # Reset timer
+        self.last_dream_check = current_time
+        
+        # Check dream conditions
+        should_dream, conditions = self.dream_manager.check_sleep_conditions()
+          # Enter dream cycle if needed
+        if should_dream:
+            print("[Brainstem] System needs memory consolidation, entering dream cycle...")
+            success = self.dream_manager.enter_dream_cycle()
+            return success
+            
+        return False
+        
+    def receive_signal(self, source, payload):
+        """Handle incoming signals routed via the Body."""
+        # Extract signal type
+        if isinstance(payload, dict):
+            message_type = payload.get("type", "")
+            data = payload.get("data", {})
+        else:
+            message_type = ""
+            data = {}
+            
+        print(f"[Brainstem] Received signal from {source}: {message_type}")
+        
+        # Process input request
+        if message_type == "process_input":
+            user_input = data.get("input", "")
+            result = self.process_input(user_input)
+            print(f"[Brainstem] Response: {result}")
+            return result
+            
+        # Handle system events
+        elif message_type == "system_event":
+            event = payload.get("event", "")
+            if event == "dream_cycle_start":
+                print("[Brainstem] Dream cycle started - reducing processing priority")
+                return {"status": "acknowledged"}
+            elif event == "dream_cycle_end":
+                print("[Brainstem] Dream cycle ended - restoring normal processing")
+                duration = payload.get("data", {}).get("duration", 0)
+                insights = payload.get("data", {}).get("insights_generated", 0)
+                print(f"[Brainstem] Dream cycle completed in {duration:.2f}s, generated {insights} insights")
+                return {"status": "acknowledged"}
+                
+        # Handle fragment changes
+        elif message_type == "fragment_change":
+            print("[Brainstem] Fragment activation levels changed")
+            dominant = payload.get("dominant_fragment", "unknown")
+            print(f"[Brainstem] Dominant fragment is now: {dominant}")
+            return {"status": "acknowledged"}
+            
+        # Handle fragment reset
+        elif message_type == "fragment_reset":
+            print("[Brainstem] Fragment activation levels reset to default")
+            return {"status": "acknowledged"}
+            
+        # Handle unknown signal types
+        return {"status": "unknown_signal"}
 
 # For direct testing
 if __name__ == "__main__":

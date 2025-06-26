@@ -1,0 +1,37 @@
+BlackwallV2 Integrated Demo Log - 2025-06-25 18:29:49.984866
+============================================================
+
+[18:29:49] INFO: Starting Production BlackwallV2 Runtime
+[18:29:49] INFO: Initializing system components...
+[18:29:49] INFO: Loading real memories from: D:\UML Calculator\UML_Calculator_V1\TREES\BlackwallV2\Implementation\memlong\ltm_buffer.json
+[18:29:49] SUCCESS: Successfully loaded memories: 2 entries
+[18:29:49] SUCCESS: System ready, entering command loop
+[18:31:38] INFO: System status:
+[18:31:38] INFO:   STM entries: 14
+[18:31:38] INFO:   LTM entries: 2
+[18:31:38] INFO:   Dream cycle needed: False
+[18:31:38] INFO:   - fragmentation: 0.5000
+[18:31:38] INFO:   - system_load: 0.0000
+[18:31:38] INFO:   - time_since_last_dream: 3808.7434
+[18:31:38] INFO:   Dominant fragment: Lyra
+[18:31:42] INFO: Current fragment activation levels:
+[18:31:42] INFO:   Lyra: 50.0
+[18:31:42] INFO:   Blackwall: 50.0
+[18:31:42] INFO:   Nyx: 30.0
+[18:31:42] INFO:   Obelisk: 30.0
+[18:31:42] INFO:   Seraphis: 30.0
+[18:31:42] INFO:   Velastra: 30.0
+[18:31:42] INFO:   Echoe: 30.0
+[18:31:43] INFO: Current memory contents:
+[18:31:43] INFO:   unknown: 1 entries
+[18:31:43] INFO:   unknown: 2 entries
+[18:31:43] INFO: Sample memories:
+[18:31:43] INFO:   unknown: No content...
+[18:31:43] INFO:   unknown: No content...
+[18:31:46] INFO: Forcing dream cycle...
+[18:31:46] INFO: Entering dream cycle...
+[18:31:46] INFO: Consolidated 2 memories with tag 'untagged'
+[18:31:46] INFO: Dream cycle completed in 0.00 seconds
+[18:31:46] SUCCESS: Dream cycle completed successfully
+[18:31:48] INFO: Exiting demo
+[18:31:48] INFO: Demo session ended

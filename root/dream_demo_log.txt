@@ -1,0 +1,62 @@
+Dream Cycle Demo Log - 2025-06-25 17:26:01.392052
+==================================================
+
+[17:26:01] INFO: Starting Dream Cycle Demo
+[17:26:01] INFO: ==================================================
+[17:26:01] INFO: Creating system components...
+[17:26:01] INFO: System components initialized
+[17:26:01] INFO: 
+Phase 1: Creating initial memories...
+[17:26:01] INFO: Added memory: science - Water's chemical formula is H₂O...
+[17:26:01] INFO: Added memory: history - The Roman Empire fell in 476 CE...
+[17:26:01] INFO: Added memory: math - The Pythagorean theorem states that a² +...
+[17:26:01] INFO: Added memory: language - The English alphabet has 26 letters...
+[17:26:01] INFO: Added memory: language - English has Germanic roots with Latin in...
+[17:26:01] INFO: 
+Initial dream check: Should sleep = False
+[17:26:01] INFO:   fragmentation: 0.6601
+[17:26:01] INFO:   system_load: 0.0000
+[17:26:01] INFO:   time_since_last_dream: 3700.0026
+[17:26:01] INFO: 
+Phase 2: Adding more memories to increase fragmentation...
+[17:26:02] INFO: Added 15 more memories
+[17:26:02] INFO: Current memory count: 21
+[17:26:02] INFO: Memory distribution by topic:
+[17:26:02] INFO:   science: 5 memories
+[17:26:02] INFO:   history: 3 memories
+[17:26:02] INFO:   math: 3 memories
+[17:26:02] INFO:   language: 4 memories
+[17:26:02] INFO:   art: 5 memories
+[17:26:02] INFO: 
+After adding memories: Should sleep = False
+[17:26:02] INFO:   fragmentation: 0.5072
+[17:26:02] INFO:   system_load: 0.0000
+[17:26:02] INFO:   time_since_last_dream: 3701.0072
+[17:26:02] INFO: 
+Phase 3: Initiating dream cycle...
+[17:26:03] WARNING: Forcing dream cycle for demonstration...
+[17:26:03] INFO: Entering dream cycle...
+[17:26:03] INFO: Entering dream cycle...
+[17:26:03] INFO: Consolidated 5 memories with tag 'science'
+[17:26:03] INFO: Consolidated 3 memories with tag 'history'
+[17:26:03] INFO: Consolidated 3 memories with tag 'math'
+[17:26:03] INFO: Consolidated 3 memories with tag 'language'
+[17:26:03] INFO: Consolidated 5 memories with tag 'art'
+[17:26:03] INFO: Dream cycle completed in 0.00 seconds
+[17:26:03] SUCCESS: Dream cycle completed successfully
+[17:26:03] INFO: 
+Phase 4: Examining dream cycle results...
+[17:26:04] INFO: Found 0 consolidated memories
+[17:26:04] INFO: Generated 0 insights
+[17:26:04] INFO: 
+Phase 5: Dream cycle statistics...
+[17:26:04] INFO: Dream cycle statistics:
+[17:26:04] INFO:   total_cycles: 6
+[17:26:04] INFO:   total_memories_processed: 120
+[17:26:04] INFO:   total_consolidations: 29
+[17:26:04] INFO:   insights_generated: 0
+[17:26:04] INFO:   last_cycle_duration: 0.00
+[17:26:04] SUCCESS: 
+Dream Cycle Demo completed
+[17:26:04] INFO: Check dream_log.txt for detailed dream activity
+[17:26:04] INFO: ==================================================

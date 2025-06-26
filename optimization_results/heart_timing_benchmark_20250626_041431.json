@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-06-26T04:14:31.243318",
+  "overall_improvement_percent": 9.372391332372922,
+  "pulse_performance_improvement_percent": 0.6255166096999754,
+  "signal_distribution_improvement_percent": 18.11926605504587,
+  "results": {
+    "original": {
+      "pulse_performance": {
+        "single_pulse_time_avg": 2.1505355834960938e-05,
+        "single_pulse_times": [
+          3.147125244140625e-05,
+          2.6226043701171875e-05,
+          1.2874603271484375e-05,
+          1.6927719116210938e-05,
+          2.002716064453125e-05
+        ],
+        "multi_pulse_time": 0.021344661712646484
+      },
+      "signal_distribution": {
+        "time": 0.0002079010009765625,
+        "signals_received": 1000
+      }
+    },
+    "optimized": {
+      "pulse_performance": {
+        "single_pulse_time_avg": 3.7050247192382814e-05,
+        "single_pulse_times": [
+          3.814697265625e-05,
+          5.507469177246094e-05,
+          2.1457672119140625e-05,
+          2.765655517578125e-05,
+          4.291534423828125e-05
+        ],
+        "multi_pulse_time": 0.02121114730834961,
+        "improvements": {
+          "single_pulse_percent": -15.544891357421875,
+          "multi_pulse_percent": 0.6255166096999754
+        }
+      },
+      "signal_distribution": {
+        "time": 0.00017023086547851562,
+        "signals_received": 450,
+        "improvements": {
+          "time_percent": 18.11926605504587
+        }
+      }
+    }
+  }
+}

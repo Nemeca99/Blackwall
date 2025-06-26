@@ -1,0 +1,7 @@
+The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.
+
+This is a test file with lots of repetition to test compression. This is a test file with lots of repetition to test compression. This is a test file with lots of repetition to test compression. This is a test file with lots of repetition to test compression. This is a test file with lots of repetition to test compression.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Testing compression with repeated patterns and words. Testing compression with repeated patterns and words. Testing compression with repeated patterns and words. Testing compression with repeated patterns and words. Testing compression with repeated patterns and words.

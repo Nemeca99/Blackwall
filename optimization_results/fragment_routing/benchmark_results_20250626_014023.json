@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-06-26T01:40:21.737658",
+  "routing": {
+    "original": {
+      "small": 0.013306140899658203,
+      "medium": 0.046862125396728516,
+      "large": 0.16901159286499023
+    },
+    "optimized": {
+      "small": 0.0007891654968261719,
+      "medium": 0.0015482902526855469,
+      "large": 0.003638029098510742
+    }
+  },
+  "input_analysis": {
+    "original": {
+      "short": 0.0036706924438476562,
+      "medium": 0.0044155120849609375,
+      "long": 0.0030889511108398438
+    },
+    "optimized": {
+      "short": 0.0036406517028808594,
+      "medium": 0.0028104782104492188,
+      "long": 0.0033617019653320312
+    }
+  },
+  "fragment_adjustment": {
+    "original": 0.001861572265625,
+    "optimized": 0.002918243408203125
+  },
+  "signal_processing": {
+    "original": 0.0028524398803710938,
+    "optimized": 0.002968311309814453
+  },
+  "summary": {
+    "avg_routing_improvement": 96.20423476435361,
+    "avg_input_analysis_improvement": 9.446133543193325,
+    "fragment_adjustment_improvement": -56.76229508196722,
+    "signal_processing_improvement": -4.062186559679038,
+    "overall_improvement": 32.01582791012432
+  }
+}

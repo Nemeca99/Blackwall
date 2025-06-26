@@ -1,0 +1,57 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Log files
+*.log
+log/*.log
+*.log.*
+
+# Virtual environment
+venv/
+env/
+ENV/
+.env
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.pydevproject
+.settings/
+
+# Profiling and performance results
+profile_results/
+*.profile
+*.stats
+
+# Generated documentation
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+*~
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+temp/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*

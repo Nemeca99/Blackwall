@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-06-25T21:50:33.406596",
+  "tests": [
+    {
+      "memory_count": 100,
+      "tag_consolidation": {
+        "original_time": 9.34600830078125e-05,
+        "optimized_time": 6.198883056640625e-05,
+        "improvement_percent": 33.673469387755105,
+        "original_count": 10,
+        "optimized_count": 10
+      },
+      "content_consolidation": {
+        "original_time": 0.008182525634765625,
+        "optimized_time": 9.232578992843628,
+        "improvement_percent": -112732.87587412588,
+        "original_count": 18,
+        "optimized_count": 14
+      }
+    },
+    {
+      "memory_count": 500,
+      "tag_consolidation": {
+        "original_time": 0.00012230873107910156,
+        "optimized_time": 0.00011992454528808594,
+        "improvement_percent": 1.949317738791423,
+        "original_count": 10,
+        "optimized_count": 10
+      },
+      "content_consolidation": {
+        "original_time": 0.05425715446472168,
+        "optimized_time": 42.774962425231934,
+        "improvement_percent": -78737.4599575517,
+        "original_count": 32,
+        "optimized_count": 54
+      }
+    },
+    {
+      "memory_count": 1000,
+      "tag_consolidation": {
+        "original_time": 0.0002512931823730469,
+        "optimized_time": 0.00019669532775878906,
+        "improvement_percent": 21.72675521821632,
+        "original_count": 10,
+        "optimized_count": 10
+      },
+      "content_consolidation": {
+        "original_time": 0.12038683891296387,
+        "optimized_time": 85.07207918167114,
+        "improvement_percent": -70565.59762664401,
+        "original_count": 33,
+        "optimized_count": 151
+      }
+    }
+  ]
+}

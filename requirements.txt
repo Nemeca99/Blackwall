@@ -1,0 +1,15 @@
+# BlackwallV2 Dependencies
+
+# Core dependencies
+psutil>=5.9.0  # For memory usage monitoring
+requests>=2.28.0  # For API requests
+python-dotenv>=0.20.0  # For environment variables
+
+# LLM integration
+openai>=0.27.0  # For OpenAI API integration
+litellm>=0.1.0  # For unified LLM provider support
+
+# Optional dependencies
+matplotlib>=3.5.0  # For visualization (optional)
+numpy>=1.22.0  # For numerical operations
+pandas>=1.4.0  # For data manipulation (optional)

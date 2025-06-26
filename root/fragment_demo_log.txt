@@ -1,0 +1,174 @@
+Fragment Integration Demo Log - 2025-06-25 17:26:14.670463
+==================================================
+
+[17:26:14] INFO: Starting Fragment Integration Demo
+[17:26:14] INFO: ==================================================
+[17:26:14] INFO: Creating system components...
+[17:26:14] INFO: System components initialized
+[17:26:14] INFO: 
+Phase 1: Creating test organs...
+[17:26:14] INFO: Registered 5 test organs with router
+[17:26:14] INFO: 
+Initial Routing Table:
+[17:26:14] INFO:   organ-1: MathOrgan - Capabilities: math, calculation, logic
+[17:26:14] INFO:   organ-2: LanguageOrgan - Capabilities: language, translation, text
+[17:26:14] INFO:   organ-3: MemoryOrgan - Capabilities: memory, history, recall
+[17:26:14] INFO:   organ-4: CreativeOrgan - Capabilities: creativity, art, imagination
+[17:26:14] INFO:   organ-5: SecurityOrgan - Capabilities: security, validation, protection
+[17:26:14] INFO: 
+Phase 2: Basic routing without fragment influence...
+[17:26:14] INFO: Organs with 'math' capability: organ-1
+[17:26:14] INFO: Organs with 'language' capability: organ-2
+[17:26:14] INFO: Organs with 'memory' capability: organ-3
+[17:26:14] INFO: Organs with 'creativity' capability: organ-4
+[17:26:14] INFO: Organs with 'security' capability: organ-5
+[17:26:14] INFO: 
+Phase 3: Integrating fragment manager with router...
+[17:26:14] SUCCESS: Fragment manager successfully integrated with router
+[17:26:14] INFO: 
+Current fragment activation levels:
+[17:26:14] INFO:   Lyra: 50.0
+[17:26:14] INFO:   Blackwall: 50.0
+[17:26:14] INFO:   Nyx: 30.0
+[17:26:14] INFO:   Obelisk: 30.0
+[17:26:14] INFO:   Seraphis: 30.0
+[17:26:14] INFO:   Velastra: 30.0
+[17:26:14] INFO:   Echoe: 30.0
+[17:26:14] INFO: 
+Phase 4: Routing with default fragment influence...
+[17:26:14] INFO: Organs with 'math' capability: organ-1
+[17:26:14] INFO: Organs with 'language' capability: organ-2
+[17:26:14] INFO: Organs with 'memory' capability: organ-3
+[17:26:14] INFO: Organs with 'creativity' capability: organ-4
+[17:26:14] INFO: Organs with 'security' capability: organ-5
+[17:26:14] INFO: 
+Phase 5: Adjusting fragment levels...
+[17:26:14] INFO: 
+Testing scenario: Obelisk Dominant (Logic/Math)
+[17:26:14] INFO: Updated fragment activation levels:
+[17:26:14] INFO:   Lyra: 40.0
+[17:26:14] INFO:   Blackwall: 50.0
+[17:26:14] INFO:   Nyx: 20.0
+[17:26:14] INFO:   Obelisk: 70.0
+[17:26:14] INFO:   Seraphis: 30.0
+[17:26:14] INFO:   Velastra: 30.0
+[17:26:14] INFO:   Echoe: 30.0
+[17:26:14] INFO: Dominant fragment: Obelisk
+[17:26:14] INFO: 
+Testing routing priorities:
+[17:26:14] INFO:   'math' → organ-1
+[17:26:14] INFO:   'language' → organ-2
+[17:26:14] INFO:   'memory' → organ-3
+[17:26:14] INFO:   'creativity' → organ-4
+[17:26:14] INFO:   'security' → organ-5
+[17:26:15] INFO: 
+Testing scenario: Seraphis Dominant (Language/Empathy)
+[17:26:15] INFO: Updated fragment activation levels:
+[17:26:15] INFO:   Lyra: 40.0
+[17:26:15] INFO:   Blackwall: 50.0
+[17:26:15] INFO:   Nyx: 20.0
+[17:26:15] INFO:   Obelisk: 50.0
+[17:26:15] INFO:   Seraphis: 70.0
+[17:26:15] INFO:   Velastra: 30.0
+[17:26:15] INFO:   Echoe: 30.0
+[17:26:15] INFO: Dominant fragment: Seraphis
+[17:26:15] INFO: 
+Testing routing priorities:
+[17:26:15] INFO:   'math' → organ-1
+[17:26:15] INFO:   'language' → organ-2
+[17:26:15] INFO:   'memory' → organ-3
+[17:26:15] INFO:   'creativity' → organ-4
+[17:26:15] INFO:   'security' → organ-5
+[17:26:15] INFO: 
+Testing scenario: Blackwall Dominant (Security)
+[17:26:15] INFO: Updated fragment activation levels:
+[17:26:15] INFO:   Lyra: 40.0
+[17:26:15] INFO:   Blackwall: 90.0
+[17:26:15] INFO:   Nyx: 20.0
+[17:26:15] INFO:   Obelisk: 50.0
+[17:26:15] INFO:   Seraphis: 50.0
+[17:26:15] INFO:   Velastra: 30.0
+[17:26:15] INFO:   Echoe: 30.0
+[17:26:15] INFO: Dominant fragment: Blackwall
+[17:26:15] INFO: 
+Testing routing priorities:
+[17:26:15] INFO:   'math' → organ-1
+[17:26:15] INFO:   'language' → organ-2
+[17:26:15] INFO:   'memory' → organ-3
+[17:26:15] INFO:   'creativity' → organ-4
+[17:26:15] INFO:   'security' → organ-5
+[17:26:16] INFO: 
+Testing scenario: Echoe Dominant (Memory/History)
+[17:26:16] INFO: Updated fragment activation levels:
+[17:26:16] INFO:   Lyra: 40.0
+[17:26:16] INFO:   Blackwall: 70.0
+[17:26:16] INFO:   Nyx: 20.0
+[17:26:16] INFO:   Obelisk: 50.0
+[17:26:16] INFO:   Seraphis: 50.0
+[17:26:16] INFO:   Velastra: 30.0
+[17:26:16] INFO:   Echoe: 70.0
+[17:26:16] INFO: Dominant fragment: Blackwall
+[17:26:16] INFO: 
+Testing routing priorities:
+[17:26:16] INFO:   'math' → organ-1
+[17:26:16] INFO:   'language' → organ-2
+[17:26:16] INFO:   'memory' → organ-3
+[17:26:16] INFO:   'creativity' → organ-4
+[17:26:16] INFO:   'security' → organ-5
+[17:26:16] INFO: 
+Testing scenario: Nyx Dominant (Creativity/Exploration)
+[17:26:16] INFO: Updated fragment activation levels:
+[17:26:16] INFO:   Lyra: 40.0
+[17:26:16] INFO:   Blackwall: 70.0
+[17:26:16] INFO:   Nyx: 60.0
+[17:26:16] INFO:   Obelisk: 50.0
+[17:26:16] INFO:   Seraphis: 50.0
+[17:26:16] INFO:   Velastra: 30.0
+[17:26:16] INFO:   Echoe: 50.0
+[17:26:16] INFO: Dominant fragment: Blackwall
+[17:26:16] INFO: 
+Testing routing priorities:
+[17:26:16] INFO:   'math' → organ-1
+[17:26:16] INFO:   'language' → organ-2
+[17:26:16] INFO:   'memory' → organ-3
+[17:26:16] INFO:   'creativity' → organ-4
+[17:26:16] INFO:   'security' → organ-5
+[17:26:17] INFO: 
+Phase 6: Testing input-driven fragment adjustments...
+[17:26:17] INFO: Reset fragments to default levels
+[17:26:17] INFO: 
+Analyzing input: 'Calculate the square root of 144 and analyze the result logically'
+[17:26:17] INFO: Fragment adjustments based on input:
+[17:26:17] INFO:   Obelisk: +15.0
+[17:26:17] INFO: Updated dominant fragment: Lyra
+[17:26:17] INFO: Routing decision for 'math': organ-1
+[17:26:17] INFO: 
+Analyzing input: 'How does it feel when someone shows compassion and empathy?'
+[17:26:17] INFO: Fragment adjustments based on input:
+[17:26:17] INFO:   Seraphis: +15.0
+[17:26:17] INFO: Updated dominant fragment: Lyra
+[17:26:17] INFO: Routing decision for 'language': organ-2
+[17:26:18] INFO: 
+Analyzing input: 'Please remember my previous request and maintain continuity'
+[17:26:18] INFO: Fragment adjustments based on input:
+[17:26:18] INFO:   Echoe: +5.0
+[17:26:18] INFO: Updated dominant fragment: Lyra
+[17:26:18] INFO: Routing decision for 'memory': organ-3
+[17:26:18] INFO: 
+Analyzing input: 'We need to ensure security and protect the system from threats'
+[17:26:18] INFO: Fragment adjustments based on input:
+[17:26:18] INFO:   Blackwall: +10.0
+[17:26:18] INFO: Updated dominant fragment: Blackwall
+[17:26:18] INFO: Routing decision for 'security': organ-5
+[17:26:19] INFO: 
+Analyzing input: 'I wonder what creative possibilities we could explore together'
+[17:26:19] INFO: Fragment adjustments based on input:
+[17:26:19] INFO:   Nyx: +5.0
+[17:26:19] INFO:   Velastra: +5.0
+[17:26:19] INFO: Updated dominant fragment: Blackwall
+[17:26:19] INFO: Routing decision for 'creativity': organ-4
+[17:26:19] INFO: 
+Phase 7: Restoring original routing...
+[17:26:19] SUCCESS: 
+Fragment Integration Demo completed
+[17:26:19] INFO: ==================================================

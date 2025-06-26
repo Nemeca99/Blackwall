@@ -19,40 +19,20 @@ root_dir = implementation_dir / "root"
 sys.path.insert(0, str(implementation_dir))
 sys.path.insert(0, str(root_dir))
 
-# Import the heart and queue_manager modules
+# Import required modules from root
 try:
-    # Using importlib to load the modules from file path
-    import importlib.util
+    from heart import Heart
+    from queue_manager import QueueManager, ProcessingItem
+    from router import Router
+    from body import Body
+    from brainstem import Brainstem
     
-    # Import heart module
-    heart_spec = importlib.util.spec_from_file_location("heart", root_dir / "heart.py")
-    if heart_spec is None:
-        raise ImportError(f"Could not find heart module at {root_dir / 'heart.py'}")
-    
-    heart_module = importlib.util.module_from_spec(heart_spec)
-    sys.modules["heart"] = heart_module
-    heart_spec.loader.exec_module(heart_module)
-    Heart = heart_module.Heart
-    
-    # Import queue manager module
-    qm_spec = importlib.util.spec_from_file_location("queue_manager", root_dir / "queue_manager.py")
-    if qm_spec is None:
-        raise ImportError(f"Could not find queue manager module at {root_dir / 'queue_manager.py'}")
-    
-    qm_module = importlib.util.module_from_spec(qm_spec)
-    sys.modules["queue_manager"] = qm_module
-    qm_spec.loader.exec_module(qm_module)
-    QueueManager = qm_module.QueueManager
-    ProcessingItem = qm_module.ProcessingItem
-    
-    # Import router module
-    router_spec = importlib.util.spec_from_file_location("router", root_dir / "router.py")
-    if router_spec is None:
-        raise ImportError(f"Could not find router module at {root_dir / 'router.py'}")
-    router_module = importlib.util.module_from_spec(router_spec)
-    sys.modules["router"] = router_module
-    router_spec.loader.exec_module(router_module)
-    Router = router_module.Router
+    # Additional required modules    try:
+        from lungs import Lungs
+        from Left_Hemisphere import ShortTermMemory
+        from Right_Hemisphere import LongTermMemory
+    except ImportError:
+        print("Note: Some optional modules could not be imported")
     
     print("\nHeart, QueueManager, and Router modules imported successfully\n")
 except ImportError as e:
@@ -111,20 +91,26 @@ class Brainstem:
         print("[Brainstem] Initialized")
     
     def process_input(self, item):
-        self.logger.log(f"[Brainstem] Processing: {item.content.get('text', '')}")
+        text_input = item.content.get('text', '')
+        self.logger.log(f"[Brainstem] Processing: {text_input}")
         
         # Simulate processing delay
         time.sleep(self.processing_delay)
         
+        # Handle empty input
+        if not text_input.strip():
+            response = "I notice you sent an empty input. How can I help you today?"
         # Simple decision tree based on input content
-        if "identity" in item.content.get("text", "").lower():
+        elif "identity" in text_input.lower():
             response = "I am Lyra Blackwall, a recursive biomimetic AI system based on the T.R.E.E.S. framework."
-        elif "purpose" in item.content.get("text", "").lower():
+        elif "purpose" in text_input.lower():
             response = "My purpose is to demonstrate recursive identity principles and biomimetic AI architecture."
-        elif "how" in item.content.get("text", "").lower():
+        elif "how" in text_input.lower():
             response = "I process information through a heartbeat-driven, queue-managed system with controlled concurrency."
         else:
-            response = f"I've processed your input about {item.content.get('text', '').split()[0]} through my biomimetic architecture."
+            # Split only if there is content
+            first_word = text_input.split()[0] if text_input.split() else "this topic"
+            response = f"I've processed your input about {first_word} through my biomimetic architecture."
         
         # Add response to item
         item.add_response("brainstem", response)
@@ -276,16 +262,157 @@ class Mouth:
 class BackupMouth:
     def __init__(self, logger=None):
         self.logger = logger
-        self.available = True
-    def speak(self, text):
-        self.logger.log(f"[BackupMouth] Speaking: {text}")
-        return text
+        print("[BackupMouth] Output system initialized")
+    def speak(self, message):
+        if self.logger:
+            self.logger.log(f"[BackupMouth] Speaking: {message}")
+        print(f"[BackupMouth] {message}")
     def register_with_router(self, router):
         return {"name": "BackupMouth", "type": "output", "capabilities": ["speak"]}
     def ping(self):
-        self.logger.log("[BackupMouth] Ping received and responding!")
-        return self.available
+        if self.logger:
+            self.logger.log("[BackupMouth] Ping received and responding!")
+        print("[BackupMouth] Ping received and responding!")
+        return True
+    def process(self, prompt):
+        response = f"BackupMouth response to: {prompt}"
+        self.speak(response)
+        return response
 
+class ExtraMouth:
+    def __init__(self, logger=None):
+        self.logger = logger
+        self.status = True  # Initially available
+    def speak(self, message):
+        if self.logger:
+            self.logger.log(f"[ExtraMouth] Speaking: {message}")
+        print(f"[ExtraMouth] {message}")
+    def register_with_router(self, router):
+        return {"name": "ExtraMouth", "type": "output", "capabilities": ["speak"]}
+    def ping(self):
+        if self.logger:
+            self.logger.log("[ExtraMouth] Ping received and " + ("responding!" if self.status else "NOT responding!"))
+        print("[ExtraMouth] Ping received and " + ("responding!" if self.status else "NOT responding!"))
+        return self.status
+    def process(self, prompt):
+        response = f"ExtraMouth response to: {prompt}"
+        self.speak(response)
+        return response
+
+# Add specialized organs for context-aware routing
+class MathOrgan:
+    def __init__(self, logger=None):
+        self.logger = logger
+        if logger:
+            logger.log("[MathOrgan] Math processing organ initialized")
+    
+    def register_with_router(self, router):
+        return {"name": "MathOrgan", "type": "processor", "capabilities": ["math", "calculate"]}
+    
+    def ping(self):
+        if self.logger:
+            self.logger.log("[MathOrgan] Ping received")
+        return True
+    
+    def process(self, prompt):
+        if self.logger:
+            self.logger.log(f"[MathOrgan] Processing math request: {prompt}")
+        
+        # Simple math operations
+        import re
+        if "+" in prompt:
+            nums = re.findall(r'\d+', prompt)
+            if len(nums) >= 2:
+                result = int(nums[0]) + int(nums[1])
+                return f"Math result: {nums[0]} + {nums[1]} = {result}"
+        elif "solve" in prompt.lower() and "x^2" in prompt:
+            return "Math result: x = 2 or x = -2"
+        elif "derivative" in prompt.lower() and "sin" in prompt:
+            return "Math result: The derivative of sin(x) is cos(x)"
+        elif "integrate" in prompt.lower() and "x^2" in prompt:
+            return "Math result: The integral of x^2 from 0 to 1 is 1/3"
+        
+        return f"Math result: Processed '{prompt}' but no specific calculation performed"
+
+class LanguageOrgan:
+    def __init__(self, logger=None):
+        self.logger = logger
+        if logger:
+            logger.log("[LanguageOrgan] Language processing organ initialized")
+    
+    def register_with_router(self, router):
+        return {"name": "LanguageOrgan", "type": "processor", "capabilities": ["language", "translate"]}
+    
+    def ping(self):
+        if self.logger:
+            self.logger.log("[LanguageOrgan] Ping received")
+        return True
+    
+    def process(self, prompt):
+        if self.logger:
+            self.logger.log(f"[LanguageOrgan] Processing language request: {prompt}")
+        
+        # Simple translations
+        prompt_lower = prompt.lower()
+        if "hello" in prompt_lower:
+            if "spanish" in prompt_lower:
+                return "Language result: 'hello' in Spanish is 'hola'"
+            elif "french" in prompt_lower:
+                return "Language result: 'hello' in French is 'bonjour'"
+            elif "german" in prompt_lower:
+                return "Language result: 'hello' in German is 'hallo'"
+        elif "goodbye" in prompt_lower:
+            if "spanish" in prompt_lower:
+                return "Language result: 'goodbye' in Spanish is 'adiós'"
+            elif "french" in prompt_lower:
+                return "Language result: 'goodbye' in French is 'au revoir'"
+            elif "german" in prompt_lower:
+                return "Language result: 'goodbye' in German is 'auf Wiedersehen'"
+        elif "cat" in prompt_lower:
+            if "spanish" in prompt_lower:
+                return "Language result: 'cat' in Spanish is 'gato'"
+            elif "french" in prompt_lower:
+                return "Language result: 'cat' in French is 'chat'"
+            elif "german" in prompt_lower:
+                return "Language result: 'cat' in German is 'Katze'"
+        
+        return f"Language result: Processed '{prompt}' but no specific translation performed"
+
+class MemoryOrgan:
+    def __init__(self, logger=None):
+        self.logger = logger
+        self.memory = []
+        if logger:
+            logger.log("[MemoryOrgan] Memory organ initialized")
+    
+    def register_with_router(self, router):
+        return {"name": "MemoryOrgan", "type": "processor", "capabilities": ["memory", "recall", "remember"]}
+    
+    def ping(self):
+        if self.logger:
+            self.logger.log("[MemoryOrgan] Ping received")
+        return True
+    
+    def process(self, prompt):
+        if self.logger:
+            self.logger.log(f"[MemoryOrgan] Processing memory request: {prompt}")
+        
+        prompt_lower = prompt.lower()
+        if "remember" in prompt_lower:
+            # Store the content after "remember" or "remember this:"
+            if ":" in prompt_lower:
+                content = prompt.split(":", 1)[1].strip()
+            else:
+                content = prompt
+            self.memory.append(content)
+            return f"Memory result: Remembered '{content}'"
+        
+        elif "recall" in prompt_lower or "last" in prompt_lower:
+            if not self.memory:
+                return "Memory result: No memories stored yet"
+            return f"Memory result: Last memory was '{self.memory[-1]}'"
+        
+        return f"Memory result: Processed '{prompt}' but no specific memory operation performed"
 # Add a simple logger for the demo
 class DemoLogger:
     def __init__(self, log_path):
@@ -295,13 +422,19 @@ class DemoLogger:
     def log(self, message):
         print(message)
         with open(self.log_path, 'a', encoding='utf-8') as f:
-            f.write(message + "\n")
+            f.write(str(message) + "\n")
+
+def print_and_log(message, logger=None):
+    print(message)
+    if logger:
+        with open(logger.log_path, 'a', encoding='utf-8') as f:
+            f.write(str(message) + "\n")
 
 def main():
-    print("\nInitializing BlackwallV2 Queue-Driven Architecture\n")
     # Set up demo logger first
     demo_log_path = str(root_dir / "demo_run_log.txt")
     logger = DemoLogger(demo_log_path)
+    print_and_log("\nInitializing BlackwallV2 Queue-Driven Architecture\n", logger)
     logger.log("[Demo] Starting new demo run.")
     # Create the body (central nervous system)
     body = Body()
@@ -365,13 +498,13 @@ def main():
     # Register processors with the queue manager
     brainstem.register_processors()
     
-    print("\nAll components initialized and connected.\n")
+    print_and_log("\nAll components initialized and connected.\n", logger)
     
     # Start the heart with faster rate for the demo
     heart.set_rate(1.0)
     heart.start()  # Start in background
     
-    print("\nSimulating user interaction with queue-driven processing...\n")
+    print_and_log("\nSimulating user interaction with queue-driven processing...\n", logger)
     
     # Give the heart a chance to start beating
     time.sleep(1)
@@ -402,10 +535,10 @@ def main():
         ears.receive(user_input)
     
     # Let the system process through the queue
-    print("\nLetting the system process all queued items...")
+    print_and_log("\nLetting the system process all queued items...", logger)
     time.sleep(10)
     
-    print("\nQueue stats:", queue_manager.get_stats())
+    print_and_log("\nQueue stats: " + str(queue_manager.get_stats()), logger)
     
     # Send a few more inputs with more delay
     additional_inputs = [
@@ -414,23 +547,23 @@ def main():
         "How does the heart control the flow of information"
     ]
     
-    print("\nSending a few more inputs with delay...")
+    print_and_log("\nSending a few more inputs with delay...", logger)
     for user_input in additional_inputs:
         print(f"\nUser: {user_input}")
         ears.receive(user_input)
         time.sleep(3)  # More delay to show processing in real time
     
     # Let the system run a bit longer to show heart cycles
-    print("\nLetting the system continue to run for a while...")
+    print_and_log("\nLetting the system continue to run for a while...", logger)
     time.sleep(5)
     
-    print("\nFinal queue stats:", queue_manager.get_stats())
+    print_and_log("\nFinal queue stats: " + str(queue_manager.get_stats()), logger)
     
     # Stop the heart
-    print("\nStopping the system...")
+    print_and_log("\nStopping the system...", logger)
     heart.stop()
     
-    print("\nDemo complete.")
+    print_and_log("\nDemo complete.", logger)
 
     # === Advanced Demo Scenarios ===
     logger.log("\n[Advanced Demo] Starting advanced scenarios...")
@@ -541,57 +674,32 @@ def main():
     logger.log("[Advanced Demo] Final routing table and health check complete.")
     # === End Advanced Demo ===
 
-    # Add specialized organs for context-aware routing
-    class MathOrgan:
-        def __init__(self, logger):
-            self.logger = logger
-        def register_with_router(self, router):
-            return {"name": "MathOrgan", "type": "processor", "capabilities": ["math"]}
-        def ping(self):
-            self.logger.log("[MathOrgan] Ping received.")
-            return True
-        def process(self, prompt):
-            self.logger.log(f"[MathOrgan] Processing math: {prompt}")
-            return f"[MathOrgan] (simulated) Math result for: {prompt}"
-    class LanguageOrgan:
-        def __init__(self, logger):
-            self.logger = logger
-        def register_with_router(self, router):
-            return {"name": "LanguageOrgan", "type": "processor", "capabilities": ["language"]}
-        def ping(self):
-            self.logger.log("[LanguageOrgan] Ping received.")
-            return True
-        def process(self, prompt):
-            self.logger.log(f"[LanguageOrgan] Processing language: {prompt}")
-            return f"[LanguageOrgan] (simulated) Language result for: {prompt}"
-    class MemoryOrgan:
-        def __init__(self, logger):
-            self.logger = logger
-            self.memory = []
-        def register_with_router(self, router):
-            return {"name": "MemoryOrgan", "type": "processor", "capabilities": ["memory"]}
-        def ping(self):
-            self.logger.log("[MemoryOrgan] Ping received.")
-            return True
-        def process(self, prompt):
-            if "recall" in prompt.lower() or "last input" in prompt.lower():
-                result = self.memory[-1] if self.memory else "No memory."
-                self.logger.log(f"[MemoryOrgan] Recalling: {result}")
-                return f"[MemoryOrgan] Recall: {result}"
-            else:
-                self.memory.append(prompt)
-                self.logger.log(f"[MemoryOrgan] Memorized: {prompt}")
-                return f"[MemoryOrgan] Memorized: {prompt}"
-    math_organ = MathOrgan(logger)
-    language_organ = LanguageOrgan(logger)
-    memory_organ = MemoryOrgan(logger)
-    organs.extend([math_organ, language_organ, memory_organ])
-    # Register with body for possible direct routing
-    body.register_module("math_organ", math_organ)
-    body.register_module("language_organ", language_organ)
-    body.register_module("memory_organ", memory_organ)
-
-    logger.log("\nAll components initialized and connected, including specialized organs.\n")
+    # Import and instantiate additional core organs
+    import importlib
+    heart_mod = importlib.import_module('heart')
+    lungs_mod = importlib.import_module('lungs')
+    left_mod = importlib.import_module('Left_Hemisphere')
+    right_mod = importlib.import_module('Right_Hemisphere')
+    HeartReal = heart_mod.Heart
+    Lungs = lungs_mod.Lungs
+    ShortTermMemory = left_mod.ShortTermMemory
+    LongTermMemory = right_mod.LongTermMemory
+    # Instantiate and register
+    real_heart = HeartReal(brainstem=brainstem, body=body, queue_manager=queue_manager)
+    lungs = Lungs()
+    stm = ShortTermMemory()
+    ltm = LongTermMemory()
+    body.register_module("real_heart", real_heart)
+    body.register_module("lungs", lungs)
+    body.register_module("stm", stm)
+    body.register_module("ltm", ltm)
+    logger.log("[Demo] Registered Heart, Lungs, STM, and LTM with Body.")
+    # Demonstrate routing a signal to each
+    body.route_signal("demo", "real_heart", {"type": "set_rate", "data": {"rate": 2.0}})
+    body.route_signal("demo", "lungs", {"type": "log", "data": {"entry": "Test log entry from demo."}})
+    body.route_signal("demo", "stm", {"type": "store", "data": {"item": {"role": "demo", "content": "STM test entry"}}})
+    body.route_signal("demo", "ltm", {"type": "store", "data": {"summary": {"summary": "LTM test summary", "entries": []}}})
+    logger.log("[Demo] Sent test signals to Heart, Lungs, STM, and LTM via Body.")
     
     # === Final Demo: Context-Aware Routing with Specialized Organs ===
     logger.log("\n[Final Demo] Simulating context-aware routing with specialized organs...\n")
@@ -630,10 +738,24 @@ def main():
     router.ping_organs()
     logger.log("[Final Demo] Health check complete.")
     
-    print("\n=== Final Demo complete ===")
-
-    # === Context-Aware and Prompt-Driven Routing Demo ===
+    print_and_log("\n=== Final Demo complete ===", logger)    # === Context-Aware and Prompt-Driven Routing Demo ===
     logger.log("\n[Context Routing Demo] Starting context-aware and prompt-driven routing...")
+    
+    # Create and register specialized organs
+    math_organ = MathOrgan(logger)
+    language_organ = LanguageOrgan(logger)
+    memory_organ = MemoryOrgan(logger)
+    
+    # Register with the router
+    router.register_organ(math_organ, math_organ.register_with_router(router))
+    router.register_organ(language_organ, language_organ.register_with_router(router))
+    router.register_organ(memory_organ, memory_organ.register_with_router(router))
+    
+    logger.log("[Context Routing Demo] Registered specialized organs:")
+    logger.log(f"  - {math_organ.__class__.__name__}: {math_organ.register_with_router(router)['capabilities']}")
+    logger.log(f"  - {language_organ.__class__.__name__}: {language_organ.register_with_router(router)['capabilities']}")
+    logger.log(f"  - {memory_organ.__class__.__name__}: {memory_organ.register_with_router(router)['capabilities']}")
+    
     advanced_prompts = [
         "Integrate x^2 from 0 to 1",
         "Translate 'hello' to French",
@@ -647,6 +769,7 @@ def main():
         "What is the sum of 7 and 8?",
         "What was my last message?"
     ]
+    
     for prompt in advanced_prompts:
         logger.log(f"[Context Routing Demo] User: {prompt}")
         organ_id, reason = router.route_by_context(prompt, logger)
@@ -657,6 +780,7 @@ def main():
         else:
             logger.log(f"[Context Routing Demo] No suitable organ found for: {prompt}")
         time.sleep(0.3)
+    
     logger.log("[Context Routing Demo] Complete.\n")
 
 if __name__ == "__main__":

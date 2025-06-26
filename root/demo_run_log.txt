@@ -1,59 +1,42 @@
-Demo Log
-=======
+=== BlackwallV2 Demo Log - 2025-06-25 15:43:07.481787 ===
+
 [Demo] Starting new demo run.
+
+Initializing BlackwallV2 Queue-Driven Architecture
+
 [Router] Routing table after registration:
-{'organ-1': {'name': 'Brainstem', 'type': 'processor', 'capabilities': ['input_processing', 'response_filtering', 'prepare_output'], 'id': 'organ-1'}, 'organ-2': {'name': 'Ears', 'type': 'input', 'capabilities': ['receive'], 'id': 'organ-2'}, 'organ-3': {'name': 'Mouth', 'type': 'output', 'capabilities': ['speak'], 'id': 'organ-3'}, 'organ-4': {'name': 'BackupMouth', 'type': 'output', 'capabilities': ['speak'], 'id': 'organ-4'}, 'organ-5': {'name': 'TestOrgan', 'type': 'test', 'capabilities': ['test_action'], 'id': 'organ-5'}}
-[Router] Health check results:
-[Mouth] Ping received and responding!
-[BackupMouth] Ping received and responding!
-[TestOrgan] Ping received.
-[Router] Pinging all organs...
-[Brainstem] Ping received.
-  organ-1: Brainstem is alive
-[Ears] Ping received.
-  organ-2: Ears is alive
-[Mouth] Ping received and responding!
-  organ-3: Mouth is alive
-[BackupMouth] Ping received and responding!
-  organ-4: BackupMouth is alive
-[TestOrgan] Ping received.
-  organ-5: TestOrgan is alive
+{'organ-1': {'name': 'Brainstem', 'type': 'processor', 'capabilities': ['input_processing', 'response_filtering', 'prepare_output'], 'id': 'organ-1'}, 'organ-2': {'name': 'Ears', 'type': 'input', 'capabilities': ['receive'], 'id': 'organ-2'}, 'organ-3': {'name': 'Mouth', 'type': 'output', 'capabilities': ['speak'], 'id': 'organ-3'}, 'organ-4': {'name': 'BackupMouth', 'type': 'output', 'capabilities': ['speak'], 'id': 'organ-4'}}
+All components initialized and connected.
+
+Simulating user interaction with queue-driven processing...
+
 [Demo] Sending demo inputs...
 [Demo] User: Tell me about your identity
 [Ears] Received: Tell me about your identity
+[Brainstem] Processing: Tell me about your identity
 [Demo] User: What is your purpose
 [Ears] Received: What is your purpose
-[Brainstem] Processing: Tell me about your identity
 [Demo] User: How do you process information
 [Ears] Received: How do you process information
 [Brainstem] Processing: What is your purpose
-[Demo] User: Can you handle multiple requests
-[Ears] Received: Can you handle multiple requests
+[Brainstem] Preparing output: ...
 [Brainstem] Processing: How do you process information
+[Ears] Received: Can you handle multiple requests
+[Brainstem] Preparing output: ...
 [Demo] User: What is the T.R.E.E.S. framework
 [Ears] Received: What is the T.R.E.E.S. framework
 [Brainstem] Processing: Can you handle multiple requests
 [Brainstem] Preparing output: ...
-[Brainstem] Preparing output: ...
-[Demo] User: How does your biomimetic architecture work
-[Ears] Received: How does your biomimetic architecture work
-[Brainstem] Processing: What is the T.R.E.E.S. framework
-[Demo] User: Tell me about pulse capacity
-[Ears] Received: Tell me about pulse capacity
-[Brainstem] Processing: How does your biomimetic architecture work
-[Brainstem] Preparing output: ...
-[Brainstem] Preparing output: ...
 [Demo] User: [EMPTY INPUT]
 [Ears] Received: 
-[Brainstem] Processing: Tell me about pulse capacity
-[Demo] User: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-[Ears] Received: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-[Brainstem] Processing: 
+[Brainstem] Processing: What is the T.R.E.E.S. framework
 [Brainstem] Preparing output: ...
-[Brainstem] Preparing output: ...
+
 [Demo] Sending rapid-fire inputs...
+[Brainstem] Processing: 
 [Demo] User: Rapid input 1
 [Ears] Received: Rapid input 1
+[Brainstem] Preparing output: ...
 [Demo] User: Rapid input 2
 [Ears] Received: Rapid input 2
 [Demo] User: Rapid input 3
@@ -62,7 +45,8 @@ Demo Log
 [Ears] Received: Rapid input 4
 [Demo] User: Rapid input 5
 [Ears] Received: Rapid input 5
-[Brainstem] Processing: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Letting the system process all queued items...
 [Brainstem] Processing: Rapid input 1
 [Brainstem] Processing: Rapid input 2
 [Brainstem] Processing: Rapid input 3
@@ -74,157 +58,72 @@ Demo Log
 [Brainstem] Preparing output: ...
 [Brainstem] Preparing output: ...
 [Brainstem] Preparing output: ...
-[Brainstem] Preparing output: ...
-[Ears] Received: How many items per heartbeat can you process
-[Brainstem] Processing: How many items per heartbeat can you process
-[Brainstem] Preparing output: ...
-[Ears] Received: What happens if the queue is full
-[Brainstem] Processing: What happens if the queue is full
-[Brainstem] Preparing output: ...
-[Ears] Received: How does the heart control the flow of information
-[Brainstem] Processing: How does the heart control the flow of information
-[Brainstem] Preparing output: ...
 
-[Advanced Demo] Starting advanced scenarios...
-[Advanced Demo] Unregistering BackupMouth...
-[Advanced Demo] BackupMouth unregistered (ID: organ-4)
-[Advanced Demo] Re-registering BackupMouth...
-[Advanced Demo] BackupMouth re-registered (ID: organ-6)
-[Advanced Demo] Changing TestOrgan's capabilities at runtime...
-[Advanced Demo] TestOrgan capabilities updated: ['test_action', 'dynamic_capability']
-[Advanced Demo] Registering ExtraMouth for load balancing...
-[Advanced Demo] ExtraMouth registered (ID: organ-7)
-[Advanced Demo] Output organs for load balancing: ['organ-3', 'organ-6', 'organ-7']
-[Advanced Demo] Routing output to Mouth (ID: organ-3)
-[Mouth] Speaking: Load balancing test message 1
-[Advanced Demo] Routing output to BackupMouth (ID: organ-6)
-[BackupMouth] Speaking: Load balancing test message 2
-[Advanced Demo] Routing output to ExtraMouth (ID: organ-7)
-[ExtraMouth] Speaking: Load balancing test message 3
-[Advanced Demo] Routing output to Mouth (ID: organ-3)
-[Mouth] Speaking: Load balancing test message 4
-[Advanced Demo] Routing output to BackupMouth (ID: organ-6)
-[BackupMouth] Speaking: Load balancing test message 5
-[Advanced Demo] Routing output to ExtraMouth (ID: organ-7)
-[ExtraMouth] Speaking: Load balancing test message 6
-[Advanced Demo] Simulating health check failure and recovery...
-[Mouth] Ping received and NOT responding!
-[TestOrgan] Ping received.
-[BackupMouth] Ping received and responding!
-[ExtraMouth] Ping received and responding!
-[Advanced Demo] ExtraMouth set to unavailable. Health check performed.
-[Mouth] Ping received and NOT responding!
-[TestOrgan] Ping received.
-[BackupMouth] Ping received and responding!
-[ExtraMouth] Ping received and responding!
-[Advanced Demo] ExtraMouth recovered. Health check performed.
-[Advanced Demo] Stress test: rapid organ registration/unregistration and high input volume...
-[Advanced Demo] Temp organ registered (ID: organ-8)
-[Advanced Demo] Temp organ unregistered (ID: organ-8)
-[Advanced Demo] Temp organ registered (ID: organ-9)
-[Advanced Demo] Temp organ unregistered (ID: organ-9)
-[Advanced Demo] Temp organ registered (ID: organ-10)
-[Advanced Demo] Temp organ unregistered (ID: organ-10)
-[Advanced Demo] User: Stress input 1
-[Ears] Received: Stress input 1
-[Advanced Demo] User: Stress input 2
-[Ears] Received: Stress input 2
-[Advanced Demo] User: Stress input 3
-[Ears] Received: Stress input 3
-[Advanced Demo] User: Stress input 4
-[Ears] Received: Stress input 4
-[Advanced Demo] User: Stress input 5
-[Ears] Received: Stress input 5
-[Advanced Demo] User: Stress input 6
-[Ears] Received: Stress input 6
-[Advanced Demo] User: Stress input 7
-[Ears] Received: Stress input 7
-[Advanced Demo] User: Stress input 8
-[Ears] Received: Stress input 8
-[Advanced Demo] User: Stress input 9
-[Ears] Received: Stress input 9
-[Advanced Demo] User: Stress input 10
-[Ears] Received: Stress input 10
-[Advanced Demo] Stress test complete.
+Queue stats: {'enqueued': 11, 'processed': 11, 'completed': 11, 'errors': 0, 'avg_processing_time': 3.5243809999999995, 'queue_lengths': {'input': 0, 'processing': 0, 'output': 0, 'memory': 0, 'system': 0}, 'active_items': 0}
 
-[Mouth] Ping received and NOT responding!
-[TestOrgan] Ping received.
-[BackupMouth] Ping received and responding!
-[ExtraMouth] Ping received and responding!
-[Advanced Demo] Final routing table and health check complete.
-
-All components initialized and connected, including specialized organs.
-
-
-[Final Demo] Simulating context-aware routing with specialized organs...
-
-[User] Calculate 2 + 2
-[Ears] Received: Calculate 2 + 2
-[User] Translate 'hello' to Spanish
-[Ears] Received: Translate 'hello' to Spanish
-[User] Remember my last input
-[Ears] Received: Remember my last input
-[User] What is the capital of France?
-[Ears] Received: What is the capital of France?
-[User] Solve the equation x^2 - 4 = 0
-[Ears] Received: Solve the equation x^2 - 4 = 0
-[User] Who wrote 'To be, or not to be'?
-[Ears] Received: Who wrote 'To be, or not to be'?
-[User] Recall my last input
-[Ears] Received: Recall my last input
-[User] Define the term 'biomimetic'
-[Ears] Received: Define the term 'biomimetic'
-[User] What is 5 * 6?
-[Ears] Received: What is 5 * 6?
-[User] Translate 'goodbye' to French
-[Ears] Received: Translate 'goodbye' to French
-
-[Final Demo] Letting the system process specialized tasks...
-
-
-[Final Demo] Queue stats: {'enqueued': 37, 'processed': 16, 'completed': 16, 'errors': 1, 'avg_processing_time': 3.4788543125, 'queue_lengths': {'input': 20, 'processing': 0, 'output': 0, 'memory': 0, 'system': 0}, 'active_items': 0}
-[Final Demo] Routing table written to file.
-
-[Final Demo] Performing health check on all organs...
-[Mouth] Ping received and responding!
-[TestOrgan] Ping received.
-[BackupMouth] Ping received and responding!
-[ExtraMouth] Ping received and responding!
-[Final Demo] Health check complete.
+=== Context-Aware and Prompt-Driven Routing Demo ===
 
 [Context Routing Demo] Starting context-aware and prompt-driven routing...
+[MathOrgan] Math processing organ initialized
+[LanguageOrgan] Language processing organ initialized
+[MemoryOrgan] Memory organ initialized
+[Context Routing Demo] Registered specialized organs:
+  - MathOrgan: ['math', 'calculate']
+  - LanguageOrgan: ['language', 'translate']
+  - MemoryOrgan: ['memory', 'recall', 'remember']
+
+Testing context-aware routing with specialized prompts:
+
 [Context Routing Demo] User: Integrate x^2 from 0 to 1
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Integrate x^2 from 0 to 1
+[Router] Context: math detected. Routing to organ-5
+[MathOrgan] Processing math request: Integrate x^2 from 0 to 1
+[Context Routing Demo] Routed to MathOrgan (reason: math capability)
+[Context Routing Demo] Response: Math result: The integral of x^2 from 0 to 1 is 1/3
+
 [Context Routing Demo] User: Translate 'hello' to French
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Translate 'hello' to French
+[Router] Context: language detected. Routing to organ-6
+[LanguageOrgan] Processing language request: Translate 'hello' to French
+[Context Routing Demo] Routed to LanguageOrgan (reason: language capability)
+[Context Routing Demo] Response: Language result: 'hello' in French is 'bonjour'
+
 [Context Routing Demo] User: Recall last input
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Recall last input
+[Router] Context: memory detected. Routing to organ-7
+[MemoryOrgan] Processing memory request: Recall last input
+[Context Routing Demo] Routed to MemoryOrgan (reason: memory capability)
+[Context Routing Demo] Response: Memory result: No memories stored yet
+
 [Context Routing Demo] User: What is the derivative of sin(x)?
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: What is the derivative of sin(x)?
+[Router] Context: math detected. Routing to organ-5
+[MathOrgan] Processing math request: What is the derivative of sin(x)?
+[Context Routing Demo] Routed to MathOrgan (reason: math capability)
+[Context Routing Demo] Response: Math result: The derivative of sin(x) is cos(x)
+
 [Context Routing Demo] User: Say 'hello' in Spanish
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Say 'hello' in Spanish
+[Router] Context: language detected. Routing to organ-6
+[LanguageOrgan] Processing language request: Say 'hello' in Spanish
+[Context Routing Demo] Routed to LanguageOrgan (reason: language capability)
+[Context Routing Demo] Response: Language result: 'hello' in Spanish is 'hola'
+
 [Context Routing Demo] User: Remember this: The sky is blue.
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Remember this: The sky is blue.
+[Router] Context: memory detected. Routing to organ-7
+[MemoryOrgan] Processing memory request: Remember this: The sky is blue.
+[Context Routing Demo] Routed to MemoryOrgan (reason: memory capability)
+[Context Routing Demo] Response: Memory result: Remembered 'The sky is blue.'
+
 [Context Routing Demo] User: Recall last input
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Recall last input
+[Router] Context: memory detected. Routing to organ-7
+[MemoryOrgan] Processing memory request: Recall last input
+[Context Routing Demo] Routed to MemoryOrgan (reason: memory capability)
+[Context Routing Demo] Response: Memory result: Last memory was 'The sky is blue.'
+
 [Context Routing Demo] User: Add 42 and 58
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Add 42 and 58
-[Context Routing Demo] User: Translate 'cat' to German
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: Translate 'cat' to German
-[Context Routing Demo] User: What is the sum of 7 and 8?
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: What is the sum of 7 and 8?
-[Context Routing Demo] User: What was my last message?
-[Router] Context: default input_processing. Routing to organ-1
-[Context Routing Demo] No suitable organ found for: What was my last message?
+[Router] Context: math detected. Routing to organ-5
+[MathOrgan] Processing math request: Add 42 and 58
+[Context Routing Demo] Routed to MathOrgan (reason: math capability)
+[Context Routing Demo] Response: Math result: 42 + 58 = 100
+
+Stopping the system...
+
+Demo complete.
 [Context Routing Demo] Complete.
 

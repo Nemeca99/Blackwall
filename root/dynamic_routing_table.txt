@@ -15,18 +15,8 @@ ID: organ-3
   type: output
   capabilities: ['speak']
 
-ID: organ-5
-  name: TestOrgan
-  type: test
-  capabilities: ['test_action', 'dynamic_capability']
-
-ID: organ-6
+ID: organ-4
   name: BackupMouth
-  type: output
-  capabilities: ['speak']
-
-ID: organ-7
-  name: ExtraMouth
   type: output
   capabilities: ['speak']
 

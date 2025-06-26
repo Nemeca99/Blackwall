@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackwallV2 Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>BlackwallV2 Monitoring Dashboard</h1>
+        <p>Last updated: <span id="last-updated">-</span> 
+           <button id="refresh-button" class="refresh-button">Refresh</button></p>
+    </header>
+    
+    <div class="container">
+        <div class="dashboard">
+            <!-- Media Processing Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Media Processing Performance</h2>
+                </div>
+                <div class="chart-container">
+                    <canvas id="media-processing-chart"></canvas>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" id="text-processed">0</div>
+                        <div class="metric-label">Text Items</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="image-processed">0</div>
+                        <div class="metric-label">Image Items</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="audio-processed">0</div>
+                        <div class="metric-label">Audio Items</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="video-processed">0</div>
+                        <div class="metric-label">Video Items</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Memory System Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Memory System</h2>
+                </div>
+                <div class="chart-container">
+                    <canvas id="memory-usage-chart"></canvas>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" id="memory-usage">0 MB</div>
+                        <div class="metric-label">Memory Usage</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="memory-items">0</div>
+                        <div class="metric-label">Stored Items</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="memory-ratio">0:1</div>
+                        <div class="metric-label">Compression Ratio</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="cross-modal-links">0</div>
+                        <div class="metric-label">Cross-modal Links</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fragment Routing Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Fragment Routing Efficiency</h2>
+                </div>
+                <div class="chart-container">
+                    <canvas id="fragment-routing-chart"></canvas>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" id="text-efficiency">0%</div>
+                        <div class="metric-label">Text Efficiency</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="image-efficiency">0%</div>
+                        <div class="metric-label">Image Efficiency</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="audio-efficiency">0%</div>
+                        <div class="metric-label">Audio Efficiency</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="video-efficiency">0%</div>
+                        <div class="metric-label">Video Efficiency</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Resources Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>System Resources</h2>
+                </div>
+                <div class="chart-container">
+                    <canvas id="system-resources-chart"></canvas>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" id="cpu-usage">0%</div>
+                        <div class="metric-label">CPU Usage</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="disk-io">0 MB/s</div>
+                        <div class="metric-label">Disk I/O</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>BlackwallV2 (Lyra) Monitoring System | &copy; 2025 UML Calculator</p>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
+                

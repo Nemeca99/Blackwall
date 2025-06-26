@@ -49,28 +49,62 @@ class Body:
                     success = False
         
         return success
-
-    def register_handler(self, event_name, module_name, callback):
-        """Register an event handler."""
+        
+    def register_for_event(self, event_name, callback):
+        """Register a callback to be run when the specified event is emitted."""
         if event_name not in self.event_handlers:
             self.event_handlers[event_name] = []
         
+        # Store the callback directly without module_name for simpler register_for_event API
+        self.event_handlers[event_name].append(callback)
+        print(f"[Body] Registered handler for event '{event_name}'")
+        return True
+        
+    def register_handler(self, event_name, module_name, callback):
+        """Register an event handler (legacy method, use register_for_event instead)."""
+        if event_name not in self.event_handlers:
+            self.event_handlers[event_name] = []
+        
+        # Store as a tuple to maintain compatibility with existing code
         self.event_handlers[event_name].append((module_name, callback))
         print(f"[Body] Registered handler for event '{event_name}' from {module_name}")
         return True
-
-    def emit_event(self, event_name, data=None):
+        
+    def emit_event(self, event_name, payload=None):
         """Emit an event to all registered handlers."""
         if event_name not in self.event_handlers:
-            return False
+            print(f"[Body] No handlers registered for event '{event_name}'")
+            # If no specific handlers, create empty list
+            self.event_handlers[event_name] = []
+            
+        success = True
         
-        for module_name, callback in self.event_handlers[event_name]:
+        # Call registered handlers
+        for handler in self.event_handlers[event_name]:
             try:
-                callback(data)
+                # Check if it's a tuple (from register_handler) or a direct callback (from register_for_event)
+                if isinstance(handler, tuple):
+                    module_name, callback = handler
+                    callback(payload)
+                    print(f"[Body] Event '{event_name}' handled by {module_name}")
+                else:
+                    # Direct callback from register_for_event
+                    handler(payload)
             except Exception as e:
-                print(f"[Body] Error in {module_name} handler for {event_name}: {e}")
+                print(f"[Body] Error in event handler for '{event_name}': {str(e)}")
+                success = False
         
-        return True
+        # Also broadcast the event to all modules that have handle_event method
+        for name, module in self.modules.items():
+            if hasattr(module, "handle_event"):
+                try:
+                    module.handle_event(event_name, payload)
+                    success = True
+                except Exception as e:
+                    print(f"[Body] Error in {name} general handler for {event_name}: {e}")
+                    success = False
+        
+        return success
 
     def pulse(self, interval=1.0):
         """Send a heartbeat pulse to all modules."""

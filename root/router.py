@@ -115,3 +115,48 @@ class Router:
             if logger: logger.log(f"[Router] Context: fallback. Routing to {fallback_id}")
             return fallback_id, "fallback"
         return None, "no available organ"
+
+    def route(self, message, destination=None, source=None):
+        """
+        Route a message to appropriate destination(s) based on content and routing rules.
+        
+        Args:
+            message: The message to route
+            destination: Optional specific destination ID
+            source: Optional source ID
+            
+        Returns:
+            bool: True if routing succeeded, False otherwise
+        """
+        if destination:
+            # Direct routing to specific destination
+            if destination in self.organs:
+                organ = self.organs[destination]
+                if hasattr(organ, "receive"):
+                    organ.receive(message, source)
+                    return True
+            return False
+              # Content-based routing
+        if isinstance(message, dict):
+            message_type = message.get("type", "")
+            
+            # Route based on message type
+            if message_type == "query":
+                # Find organs that can handle queries
+                handlers = self.find_organs_by_capability("query_processing")
+                for handler_id in handlers:
+                    self.organs[handler_id].receive(message, source)
+                return len(handlers) > 0
+                
+            elif message_type == "command":
+                # Find organs that can handle commands
+                handlers = self.find_organs_by_capability("command_processing") 
+                for handler_id in handlers:
+                    self.organs[handler_id].receive(message, source)
+                return len(handlers) > 0
+                  # Broadcast to all organs if no specific routing
+        for _, organ in self.organs.items():
+            if hasattr(organ, "receive"):
+                organ.receive(message, source)
+                
+        return True

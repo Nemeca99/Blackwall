@@ -89,6 +89,27 @@ class ShortTermMemory:
         
         return results
 
+    def receive_signal(self, source, payload):
+        """Handle incoming signals routed via the Body."""
+        message_type = payload.get("type", "")
+        data = payload.get("data", {})
+        print(f"[STM] Received signal from {source}: {message_type}")
+        if message_type == "store":
+            item = data.get("item")
+            if item:
+                self.store(item)
+                print(f"[STM] Stored item from signal: {item}")
+        # Add more message types as needed
+        return True
+
+    def register_with_body(self, body):
+        """Register this module with the Body system."""
+        if body:
+            result = body.register_module("stm", self)
+            print("[ShortTermMemory] Registered with body system")
+            return result
+        return False
+
 # For direct testing
 if __name__ == "__main__":
     stm = ShortTermMemory()
