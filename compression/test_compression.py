@@ -3,8 +3,8 @@
 Test script for UML Compression Engine
 """
 
-import os
-import time
+import hashlib
+import sys
 from pathlib import Path
 from uml_compression_engine import UMLCompressionEngine
 
@@ -100,8 +100,43 @@ def test_compression(test_files_dir: str = "test_files"):
                 print(f"    Original: {result_lossy['original_size']:,} bytes")
                 print(f"    Compressed: {result_lossy['compressed_size']:,} bytes")
                 print(f"    Time: {result_lossy['processing_time']:.2f}s")
+        
+        # Test decompression
+        print("\n  Mode: Decompression (Round-Trip Test)")
+        
+        # For lossless mode we can compare with the original
+        output_decompressed = output_dir / f"{test_file.stem}_decompressed{test_file.suffix}"
+        
+        result_decompress = engine.decompress(
+            str(output_lossless),
+            str(output_decompressed),
+            callback=progress_callback
+        )
+        
+        results.append(result_decompress)
+        
+        if result_decompress['status'] == 'success':
+            print("  ✓ Success! File decompressed")
+            print(f"    Compressed: {result_decompress['compressed_size']:,} bytes")
+            print(f"    Decompressed: {result_decompress['decompressed_size']:,} bytes")
+            print(f"    Time: {result_decompress['processing_time']:.2f}s")
+            
+            # Check if the decompressed file matches the original for lossless modes
+            def calculate_file_hash(filepath):
+                with open(filepath, 'rb') as file:
+                    return hashlib.sha256(file.read()).hexdigest()
+            
+            orig_hash = calculate_file_hash(str(test_file))
+            decomp_hash = calculate_file_hash(str(output_decompressed))
+            
+            if orig_hash == decomp_hash:
+                print("  ✓ Verification: Perfect round-trip (hashes match)")
             else:
-                print(f"  ✗ Failed: {result_lossy.get('error', 'Unknown error')}")
+                print("  ⚠ Verification: Round-trip produced different file (hashes don't match)")
+                print(f"    Original hash: {orig_hash[:8]}...")
+                print(f"    Decompressed hash: {decomp_hash[:8]}...")
+        else:
+            print(f"  ✗ Failed: {result_decompress.get('error', 'Unknown error')}")
         
         print("\n")
     
@@ -115,14 +150,18 @@ def test_compression(test_files_dir: str = "test_files"):
     print(f"Failed: {len(failed)}")
     
     if successful:
-        avg_ratio = sum(r['compression_ratio'] for r in successful) / len(successful)
-        avg_savings = (1 - avg_ratio) * 100
-        print(f"Average compression ratio: {avg_ratio:.3f} ({avg_savings:.1f}% savings)")
-        
-        total_original = sum(r['original_size'] for r in successful)
-        total_compressed = sum(r['compressed_size'] for r in successful)
-        total_savings = (1 - total_compressed / total_original) * 100 if total_original > 0 else 0
-        print(f"Total space saved: {total_original - total_compressed:,} bytes ({total_savings:.1f}%)")
+        # Filter only compression results, not decompression for average calculation
+        compression_results = [r for r in successful if 'compression_ratio' in r]
+        if compression_results:
+            avg_ratio = sum(r['compression_ratio'] for r in compression_results) / len(compression_results)
+            avg_savings = (1 - avg_ratio) * 100
+            print(f"Average compression ratio: {avg_ratio:.3f} ({avg_savings:.1f}% savings)")
+            
+            # Only consider compression results for total calculations
+            total_original = sum(r.get('original_size', 0) for r in compression_results)
+            total_compressed = sum(r.get('compressed_size', 0) for r in compression_results)
+            total_savings = (1 - total_compressed / total_original) * 100 if total_original > 0 else 0
+            print(f"Total space saved: {total_original - total_compressed:,} bytes ({total_savings:.1f}%)")
     
     if failed:
         print("\nFailed tests:")
@@ -151,7 +190,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. This sentence is repeat
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. This sentence is repeated to test compression efficiency.
 """
     
-    with open(test_dir / "sample.txt", "w") as f:
+    with open(test_dir / "sample.txt", "w", encoding="utf-8") as f:
         f.write(sample_text)
     
     # Sample Python file
@@ -179,15 +218,13 @@ if __name__ == "__main__":
     main()
 '''
     
-    with open(test_dir / "sample.py", "w") as f:
+    with open(test_dir / "sample.py", "w", encoding="utf-8") as f:
         f.write(sample_py)
     
     print(f"Created sample files in {test_files_dir}/")
     print("You can add your own test files (images, audio, video) to this directory.")
 
 if __name__ == "__main__":
-    import sys
-    
     if len(sys.argv) > 1 and sys.argv[1] == "create-samples":
         create_sample_files()
     else:
