@@ -13,6 +13,37 @@ This implementation provides a comprehensive framework for building AI systems w
 - Media integration for processing various data formats
 - Context-aware routing system
 
+## Key Features & Subsystems
+
+### Core Components
+
+- **Heart System**: Controls the rhythm and operational flow of the system
+- **Hemispheres**: Left (short-term) and Right (long-term) memory management
+- **Brainstem**: Handles base-level system functions and automatic processes
+- **Router**: Directs signals and processing through the system based on context
+
+### Advanced Features
+
+- **Dream Cycle**: Memory consolidation and insight generation during idle periods
+- **Fragment System**: Modular personality components with specialized capabilities
+- **Media Integration**: Process and understand various media formats (images, audio, etc.)
+- **Monitoring Tools**: Performance tracking and visualization dashboards
+
+## Project Status
+
+BlackwallV2 is under active development with the following components at various stages:
+
+- ✅ Core Architecture - Complete
+- ✅ Memory Systems - Complete
+- ✅ Heart System - Complete and Optimized
+- ✅ Dream Cycle - Complete
+- ✅ Fragment System - Complete
+- ✅ Basic Media Integration - Complete
+- 🔄 Advanced Media Integration - In Progress
+- 🔄 Compression System - In Progress
+- 🔄 Performance Optimization - Ongoing
+- 📝 Web Dashboard - Planning Stage
+
 ## Directory Structure
 
 ```text
@@ -76,11 +107,41 @@ For comprehensive documentation, see the `docs/` directory:
 
 Please refer to `docs/general/DEVELOPMENT_STANDARDS.md` for contribution guidelines and development standards.
 
+## Contributing
+
+We welcome contributions to the BlackwallV2 project! Please follow these steps:
+
+1. Review our [Development Standards](docs/general/DEVELOPMENT_STANDARDS.md)
+2. Create a feature branch (`git checkout -b feature/amazing-addition`)
+3. Make your changes and ensure tests pass
+4. Commit your changes (`git commit -m 'Add some amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-addition`)
+6. Open a Pull Request
+
+## Performance Optimization
+
+BlackwallV2 is continuously being optimized for better performance:
+
+- Memory usage optimization for long-term memory storage
+- Fast context routing algorithms
+- Efficient dream cycle consolidation
+- Parallel processing for media handling
+- Compression techniques for memory artifacts
+
 ## License
 
 This project is licensed under the terms of the included license file.
+
+## Contact & Support
+
+For questions, suggestions, or support:
+
+- Create an issue in the project repository
+- Contact the development team through the UML Calculator website
+- Join our developer community for discussions and collaboration
 
 ## Acknowledgments
 
 - UML Calculator team
 - Contributors to the BlackwallV2 project
+- Open source community for tools and libraries used in this project
